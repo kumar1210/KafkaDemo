@@ -20,6 +20,9 @@ import com.local.producer.KafkaSender;
 
 /**
  * @author gaurav's
+ * 
+ * <p> a Kafka Prodcuer configuration class, which will initialize all the setup
+ * required for a producer of kafka topic
  *
  */
 @Configuration
@@ -30,6 +33,10 @@ public class KafkaSenderConfig {
 	private KafkaPropConfig properties;
 	
 	
+	/****
+	 * a method which will load all the properties in a map
+	 * @return
+	 */
 	@Bean
 	public Map<String, Object> producerConfigs() {
 		
@@ -41,21 +48,48 @@ public class KafkaSenderConfig {
 		return props;
 	}
 	
+	/***
+	 * will initializea a producerfactory, using the property created in the previous method
+	 * @return
+	 */
 	@Bean
 	public ProducerFactory<String, String> producerFactory() {
 		
 		return new DefaultKafkaProducerFactory<String, String>(producerConfigs());
 	}
 	
+	/***
+	 * Kafkatemplate which will be use to send/produce any message to a topic
+	 * a new template will be created by passing a producerfactory passed before.
+	 * @return
+	 */
 	@Bean
 	public KafkaTemplate<String, String> kafkaTemplate() {
 	
 		return new KafkaTemplate<String, String>(producerFactory());
 	}
 	
+	/***
+	 * a simple bean class of producer
+	 * @return
+	 */
 	@Bean
 	public KafkaSender getProducer() {
 		
 		return new KafkaSender();
+	}
+
+	/**
+	 * @return the properties
+	 */
+	public KafkaPropConfig getProperties() {
+		return properties;
+	}
+
+	/**
+	 * @param properties the properties to set
+	 */
+	public void setProperties(KafkaPropConfig properties) {
+		this.properties = properties;
 	}
 }

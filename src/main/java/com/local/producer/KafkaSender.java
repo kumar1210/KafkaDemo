@@ -10,6 +10,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 /**
  * @author gaurav's
+ * 
+ *  <p> a sender/producer class which will post messages to the topic passed
+ * it will use the kafka template, created in the KafkaSenderConfig, to 
+ * post messages to kafka.
  *
  */
 public class KafkaSender {
