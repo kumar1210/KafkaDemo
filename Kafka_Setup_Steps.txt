@@ -1,0 +1,12 @@
+launching kafka steps : 
+			Nagigate to C:\Users\gaurav's\git\kafkaSetup\kafka_2.11-1.1.0\bin\windows
+	1. start the zookeeper first : zookeeper-server-start.bat ../../config/zookeeper.properties
+	2. start a kafka server  : kafka-server-start.bat ../../config/server.properties
+	3. to create a topic : kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic distributedTopic
+	4. to see the list of topics created : kafka-topics.bat --list --zookeeper localhost:2181
+	5. check the kafka cluster and topic distribution : kafka-topics.bat --describe --zookeeper localhost:2181 --topic distributedTopic
+	
+	
+	windows command to kill a process id : 
+	1. wmic process where "caption = 'java.exe' and commandline like '%server-1.properties%'" get processid
+	2. taskkill /pid 6016 /f
